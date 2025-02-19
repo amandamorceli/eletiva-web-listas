@@ -61,7 +61,75 @@ Route::get('/lista1/exercicio2', function(){
 Route::post('/lista1/resp2', function(Request $request){
     $temperatura = floatval($request->input('temperatura'));
 
-    $temperaturaConvertida=;
+    $temperaturaConvertida = $temperatura * 1.8 + 32;
+    $temperaturaConvertida = number_format($temperaturaConvertida,1); 
     
-    return view("lista1.exercicio2", compact('$temperaturaConvertida'));
+    return view("lista1.exercicio2", compact('temperaturaConvertida'));
+});
+
+Route::get('/lista1/exercicio3', function(){
+    return view('lista1.exercicio3');
+});
+
+Route::post('/lista1/resp3', function(Request $request){
+    $temperatura = floatval($request->input('temperatura'));
+
+    $temperaturaConvertida = ($temperatura - 32) * (5/9);
+    $temperaturaConvertida = number_format($temperaturaConvertida, 1); 
+    
+    return view("lista1.exercicio3", compact('temperaturaConvertida'));
+});
+
+Route::get('/lista1/exercicio4', function(){
+    return view('lista1.exercicio4');
+});
+
+Route::post('/lista1/resp4', function(Request $request){
+    $altura = floatval($request->input('altura'));
+    $largura = floatval($request->input('largura'));
+
+    $area = $altura * $largura;
+    $area = number_format($area, 2); 
+    
+    return view("lista1.exercicio4", compact('area'));
+});
+
+Route::get('/lista1/exercicio5', function(){
+    return view('lista1.exercicio5');
+});
+
+Route::post('/lista1/resp5', function(Request $request){
+    $raio = floatval($request->input('raio'));
+    
+    $area = ($raio ** 2) * pi();
+    $area = number_format($area, 2); 
+    
+    return view("lista1.exercicio5", compact('area'));
+});
+
+Route::get('/lista1/exercicio6', function(){
+    return view('lista1.exercicio6');
+});
+
+Route::post('/lista1/resp6', function(Request $request){
+    $altura = floatval($request->input('altura'));
+    $largura = floatval($request->input('largura'));
+
+    $perimetro = 2 * ($altura + $largura);
+    $perimetro = number_format($perimetro, 2);
+    
+    return view("lista1.exercicio6", compact('perimetro'));
+});
+
+Route::get('/lista1/exercicio7', function(){
+    return view('lista1.exercicio7');
+});
+
+Route::post('/lista1/resp7', function(Request $request){
+    $raio = floatval($request->input('raio'));
+
+    $perimetro = 2 * $raio * pi();
+    $perimetro = number_format($perimetro, 2);
+    
+    return view("lista1.exercicio7", compact('perimetro'));
 });
