@@ -133,3 +133,80 @@ Route::post('/lista1/resp7', function(Request $request){
     
     return view("lista1.exercicio7", compact('perimetro'));
 });
+
+Route::get('/lista1/exercicio8', function(){
+    return view('lista1.exercicio8');
+});
+
+Route::post('/lista1/resp8', function(Request $request){
+    $base = floatval($request->input('base'));
+    $expoente = floatval($request->input('expoente'));
+
+    $resultado = number_format($base ** $expoente, 0);
+    
+    return view("lista1.exercicio8", compact('resultado'));
+});
+
+Route::get('/lista1/exercicio9', function(){
+    return view('lista1.exercicio9');
+});
+
+Route::post('/lista1/resp9', function(Request $request){
+    $metros = floatval($request->input('metros'));
+
+    $centimetros = number_format($metros * 100, 2);
+    
+    return view("lista1.exercicio9", compact('centimetros'));
+});
+
+Route::get('/lista1/exercicio10', function(){
+    return view('lista1.exercicio10');
+});
+
+Route::post('/lista1/resp10', function(Request $request){
+    $kms = floatval($request->input('kms'));
+
+    $milhas = number_format($kms * 0.621371, 2);
+    
+    return view("lista1.exercicio10", compact('milhas'));
+});
+
+Route::get('/lista1/exercicio11', function(){
+    return view('lista1.exercicio11');
+});
+
+Route::post('/lista1/resp11', function(Request $request){
+    $peso = floatval($request->input('peso'));
+    $altura = floatval($request->input('altura'));
+
+    $resultado = number_format($peso / $altura ** 2, 2);
+    
+    return view("lista1.exercicio11", compact('resultado'));
+});
+
+Route::get('/lista1/exercicio12', function(){
+    return view('lista1.exercicio12');
+});
+
+Route::post('/lista1/resp12', function(Request $request){
+    $preco = floatval($request->input('preco'));
+    $desconto = (floatval($request->input('desconto'))) / 100;
+
+    $resultado = number_format($preco - ($preco * $desconto), 2, ',', '.');
+    
+    return view("lista1.exercicio12", compact('resultado'));
+});
+
+Route::get('/lista1/exercicio13', function(){
+    return view('lista1.exercicio13');
+});
+
+Route::post('/lista1/resp13', function(Request $request){
+    $capital = floatval($request->input('capital'));
+    $juros = floatval($request->input('juros'));
+    $periodo = floatval($request->input('periodo'));
+
+    $resultado = number_format($capital * $juros * $periodo, 2, ',', '.');
+    
+    return view("lista1.exercicio13", compact('resultado'));
+});
