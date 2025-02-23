@@ -9,7 +9,7 @@
 
     <div class="mb-3">
         <label for="temperatura" class="form-label">Insira uma temperatura em Fahrenheit:</label>
-        <input type="number" id="temperatura" name="temperatura" class="form-control" required="">
+        <input type="number" step="0.01" id="temperatura" name="temperatura" class="form-control" required="">
     </div>
 
     <button type="submit" class="btn btn-primary">Enviar</button>

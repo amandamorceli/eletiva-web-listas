@@ -49,7 +49,7 @@ Route::post('/lista1/resp1', function(Request $request){
     $nota2 = floatval($request->input('nota2'));
     $nota3 = floatval($request->input('nota3'));
 
-    $media = ($nota1 + $nota2 + $nota3)/3;
+    $media = number_format(($nota1 + $nota2 + $nota3)/3);
     
     return view("lista1.exercicio1", compact('media'));
 });
@@ -62,7 +62,7 @@ Route::post('/lista1/resp2', function(Request $request){
     $temperatura = floatval($request->input('temperatura'));
 
     $temperaturaConvertida = $temperatura * 1.8 + 32;
-    $temperaturaConvertida = number_format($temperaturaConvertida,1); 
+    $temperaturaConvertida = number_format($temperaturaConvertida, 1); 
     
     return view("lista1.exercicio2", compact('temperaturaConvertida'));
 });
@@ -209,4 +209,35 @@ Route::post('/lista1/resp13', function(Request $request){
     $resultado = number_format($capital * $juros * $periodo, 2, ',', '.');
     
     return view("lista1.exercicio13", compact('resultado'));
+});
+
+Route::get('/lista1/exercicio14', function(){
+    return view('lista1.exercicio14');
+});
+
+Route::post('/lista1/resp14', function(Request $request){
+    $capital = floatval($request->input('capital'));
+    $juros = floatval($request->input('juros'));
+    $periodo = floatval($request->input('periodo'));
+
+    $resultado = number_format($capital * ((1 + $juros) ** $periodo), 2, ',', '.');
+    
+    return view("lista1.exercicio14", compact('resultado'));
+});
+
+Route::get('/lista1/exercicio15', function(){
+    return view('lista1.exercicio15');
+});
+
+Route::post('/lista1/resp15', function(Request $request){
+    $dias = floatval($request->input('dias'));
+
+    $horas = intval($dias * 24);
+    $minutos = intval(($dias * 24 * 60) % 60);
+    $segundos = intval(($dias * 24 * 60 * 60) % 60);
+    
+    $resultado = "{$horas}h {$minutos}m {$segundos}s";
+    
+    return view("lista1.exercicio15", compact('resultado'));
+    
 });

@@ -1,4 +1,3 @@
-<ul>
-    <li><a href="/exercicio1">Lista 1 </a></li>
-    <br>
-</ul>
+<div class="container mt-4 d-flex flex-column gap-2">
+    <h3>Lista de exercícios 1</h3>
+</div>

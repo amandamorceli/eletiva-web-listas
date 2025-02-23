@@ -8,7 +8,7 @@
 
     <div class="mb-3">
         <label for="raio" class="form-label">Insira o raio do círculo: </label>
-        <input type="number" id="raio" name="raio" class="form-control" required="">
+        <input type="number" step="0.01" id="raio" name="raio" class="form-control" required="">
     </div>
 
     <button type="submit" class="btn btn-primary">Enviar</button>

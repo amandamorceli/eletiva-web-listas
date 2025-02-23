@@ -8,7 +8,7 @@
 
     <div class="mb-3">
         <label for="metros" class="form-label">Insira um valor em metros: </label>
-        <input type="number" id="metros" name="metros" class="form-control" required="">
+        <input type="number" step="0.01" id="metros" name="metros" class="form-control" required="">
     </div>
 
     <button type="submit" class="btn btn-primary">Enviar</button>
