@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use Illuminate\Http\Request;
 use Spatie\FlareClient\View;
+use  App\Http\Controllers\ExerciciosController;
 
 /*
 |--------------------------------------------------------------------------
@@ -40,19 +41,9 @@ Route::post('/exercicio1resp', function(Request $request){
     return view('/exercicio1', compact('soma')) ; 
 });
 
-Route::get('/lista1/exercicio1', function(){
-    return view('lista1.exercicio1');
-});
+Route::get('/lista1/exercicio1', [ExerciciosController::class, 'abrirFormularioExercicio1']);
 
-Route::post('/lista1/resp1', function(Request $request){
-    $nota1 = floatval($request->input('nota1'));
-    $nota2 = floatval($request->input('nota2'));
-    $nota3 = floatval($request->input('nota3'));
-
-    $media = number_format(($nota1 + $nota2 + $nota3)/3);
-    
-    return view("lista1.exercicio1", compact('media'));
-});
+Route::post('/lista1/resp1', [ExerciciosController::class, 'respostaExercicio1']);
 
 Route::get('/lista1/exercicio2', function(){
     return view('lista1.exercicio2');
