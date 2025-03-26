@@ -11,8 +11,6 @@
 <body class="container">
     <h1>Produtos</h1>
 
-    <a class="btn btn-primary" href="/produtos/create">Novo Produto</a>
-
     @if(session('erro'))
     <div class="alert alert-danger">
         {{ session('erro') }}
@@ -26,7 +24,7 @@
     @endif
 
     <h2>Registro de Produtos</h2>
-    <a href="#" class="btn btn-success mb-3">Novo Registro</a>
+    <a class="btn btn-success" href="/produtos/create">Novo Registro</a>
     <table class="table table-hover table-striped">
         <thead>
             <tr>
@@ -43,8 +41,8 @@
                 <td> {{ $p->nome }} </td>
                 <td> {{ $p->categoria->nome }} </td>
                 <td>
-                    <a href="#" class="btn btn-warning">Editar</a>
-                    <a href="#" class="btn btn-info">Consultar</a>
+                    <a href="/produtos/{{ $p->id }}/edit" class="btn btn-warning">Editar</a>
+                    <a href="/produtos/{{ $p->id }}" class="btn btn-info">Consultar</a>
                 </td>
             </tr>
             @endforeach
