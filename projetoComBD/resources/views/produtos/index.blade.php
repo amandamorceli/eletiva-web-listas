@@ -9,6 +9,14 @@
 </head>
 
 <body class="container">
+
+    <h3>Usuário: {{Auth::user()->name}}</h3>
+
+    <form method="post" action="/logout" >
+        @csrf
+        <button type="submit" class="btn btn-danger">Sair</button>
+    </form>
+     
     <h1>Produtos</h1>
 
     @if(session('erro'))
