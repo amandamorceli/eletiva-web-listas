@@ -4,6 +4,8 @@ use App\Models\Produto;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProdutoController;
 use App\Http\Controllers\AuthController;
+use App\Http\Middleware\RoleAdmMiddleware;
+use App\Http\Middleware\RoleCliMiddleware;
 
 /*
 |--------------------------------------------------------------------------
@@ -20,11 +22,25 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get("/login", [AuthController::class, 'showFormLogin'])->name('/login'); // não obrigatorio. quando o middlewaer bloquear a rota, ele redireciona para login
+Route::get("/login", [AuthController::class, 'showFormLogin'])->name('login'); // não obrigatorio. quando o middlewaer bloquear a rota, ele redireciona para login
 Route::post("/login", [AuthController::class, 'login']);
 
 // para restringir acesso a telas se não foi autendicado - no middlewear
-Route::middleware("auth")->group(function(){
-    Route::resource("produtos", ProdutoController::class);
-    Route::get("/logout",[AuthController::class, 'logout']);
+Route::middleware("auth")->group(function () {
+    Route::post("/logout", [AuthController::class, 'logout']);
+
+    // restrição de acesso para adm
+    Route::middleware([RoleAdmMiddleware::class])->group(function () {
+        Route::resource("produtos", ProdutoController::class);
+        Route::get('/home-adm', function () {
+            return view("home-adm");
+        });
+    });
+
+    // restrição de acesso para cliente
+    Route::middleware([RoleCliMiddleware::class])->group(function () {
+        Route::get('/home-cli', function () {
+            return view("home-cli");
+        });
+    });
 });
