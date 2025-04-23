@@ -37,6 +37,13 @@
         </select>
     </div>
 
+    <div class="mb-3">
+        <label for="foto" class="form-label">Foto:</label>
+        @if($produto->foto)
+        <img src="{{asset('storage/'.$produto->foto)}}" height="50">
+        @endif
+    </div>
+
     <p>Deseja excluir o registro?</p>
     <button type="submit" class="btn btn-danger">Excluir</button>
     <a href="/produtos" class="btn btn-primary">Cancelar</a>

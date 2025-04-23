@@ -2,7 +2,8 @@
 @section('principal')
 <h1>Novo Produto</h1>
 
-<form method="post" action="/produtos">
+<form method="post" action="/produtos" enctype="multipart/form-data"> 
+    <!-- maneira como os dados são enviados para o servidor -->
     @csrf
 
     <div class="mb-3">
@@ -34,6 +35,12 @@
             </option>
             @endforeach
         </select>
+    </div>
+
+    <div class="mb-3">
+        <label for="foto" class="form-label">Foto do produto</label>
+        <input type="file" name="foto" id="foto" class="form-control"> 
+        <!-- type file -->
     </div>
 
 

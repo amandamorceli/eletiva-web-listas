@@ -7,6 +7,7 @@ use App\Models\Produto;
 use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Storage; //métodos para verificação
 
 class ProdutoController extends Controller
 {
@@ -34,11 +35,15 @@ class ProdutoController extends Controller
     public function store(Request $request)
     {
         try {
-            Produto::create($request->all());
+            $dados = $request->all();
+            if ($request->hasFile('foto')) {
+                $dados['foto'] = $request->file('foto')->store('produtos','public');
+            }
+            Produto::create($dados);
             return redirect()->route('produtos.index')->with('sucesso', 'Produto criado com sucesso!');
 
         } catch (Exception $e) {
-            Log::error("Erroa o criar o produto: ".$e->getMessage(), [
+            Log::error("Erro ao criar o produto: ".$e->getMessage(), [
             'stack' => $e->getTraceAsString(),
             'request' => $request->all() 
         ]);
@@ -73,7 +78,14 @@ class ProdutoController extends Controller
     {
         try {
             $produto = Produto::findOrFail($id);
-            $produto->update($request->all());
+            $dados = $request->all();
+            if($request->hasFile('foto')){
+                if($produto->foto && Storage::exists('public/'.$produto->foto)){
+                    Storage::delete('public/'.$produto->foto);
+                    $dados['foto'] = $request->file('foto')->store('produtos', 'public');
+                }
+            }
+            $produto->update($dados);
             return redirect()->route('produtos.index')->with('sucesso', 'Produto alterado com sucesso!');
             
         } catch (Exception $e) {
@@ -93,6 +105,9 @@ class ProdutoController extends Controller
     {
         try {
             $produto = Produto::findOrFail($id);
+            if($produto->foto && Storage::exists('public/'.$produto->foto)){
+                Storage::delete('public/'.$produto->foto);
+            }
             $produto->delete();
             return redirect()->route('produtos.index')->with('sucesso', 'Produto excluído com sucesso!');
             
