@@ -4,6 +4,7 @@ use App\Models\Produto;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProdutoController;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\UserController;
 use App\Http\Middleware\RoleAdmMiddleware;
 use App\Http\Middleware\RoleCliMiddleware;
 
@@ -19,15 +20,19 @@ use App\Http\Middleware\RoleCliMiddleware;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('login');
 });
 
 Route::get("/login", [AuthController::class, 'showFormLogin'])->name('login'); // não obrigatorio. quando o middlewaer bloquear a rota, ele redireciona para login
 Route::post("/login", [AuthController::class, 'login']);
+Route::get("/cadastro", [UserController::class, 'create']);
+Route::post("/cadastro", [UserController::class, 'store']);
 
 // para restringir acesso a telas se não foi autendicado - no middlewear
 Route::middleware("auth")->group(function () {
     Route::post("/logout", [AuthController::class, 'logout']);
+    Route::get('/editar', [UserController::class, 'edit']);
+    Route::post('/editar', [UserController::class, 'update']);
 
     // restrição de acesso para adm
     Route::middleware([RoleAdmMiddleware::class])->group(function () {
