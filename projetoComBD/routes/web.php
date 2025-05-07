@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProdutoController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\WelcomeController;
 use App\Http\Middleware\RoleAdmMiddleware;
 use App\Http\Middleware\RoleCliMiddleware;
 
@@ -19,9 +20,7 @@ use App\Http\Middleware\RoleCliMiddleware;
 |
 */
 
-Route::get('/', function () {
-    return view('login');
-});
+Route::get('/', [WelcomeController::class, 'index']);
 
 Route::get("/login", [AuthController::class, 'showFormLogin'])->name('login'); // não obrigatorio. quando o middlewaer bloquear a rota, ele redireciona para login
 Route::post("/login", [AuthController::class, 'login']);
