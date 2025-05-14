@@ -4,6 +4,7 @@ use App\Models\Produto;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProdutoController;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\HomeClienteController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\WelcomeController;
 use App\Http\Middleware\RoleAdmMiddleware;
@@ -43,8 +44,6 @@ Route::middleware("auth")->group(function () {
 
     // restrição de acesso para cliente
     Route::middleware([RoleCliMiddleware::class])->group(function () {
-        Route::get('/home-cli', function () {
-            return view("home-cli");
-        });
+        Route::get('home-cli', [HomeClienteController::class, 'index']);
     });
 });
