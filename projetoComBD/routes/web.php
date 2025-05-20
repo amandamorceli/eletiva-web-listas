@@ -1,9 +1,9 @@
 <?php
 
-use App\Models\Produto;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProdutoController;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\CarrinhoController;
 use App\Http\Controllers\HomeClienteController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\WelcomeController;
@@ -45,5 +45,9 @@ Route::middleware("auth")->group(function () {
     // restrição de acesso para cliente
     Route::middleware([RoleCliMiddleware::class])->group(function () {
         Route::get('home-cli', [HomeClienteController::class, 'index']);
+
+        Route::get('/carrinho/add/{id}', [CarrinhoController::class, 'add']);
+        Route::get('/carrinho/remove/{id}', [CarrinhoController::class, 'remove']);
+        Route::get('/carrinho/fechar', [CarrinhoController::class, 'fechar']);
     });
 });
