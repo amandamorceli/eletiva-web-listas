@@ -14,7 +14,7 @@
     <!-- Navbar estilo dark -->
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
         <div class="container-fluid">
-            <a class="navbar-brand" href="#">E-Commerce</a>
+            <a class="navbar-brand" href="/">E-Commerce</a>
 
             <!-- Botão toggle para mobile -->
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarConteudo" aria-controls="navbarConteudo" aria-expanded="false" aria-label="Toggle navigation">

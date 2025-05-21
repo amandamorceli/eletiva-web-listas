@@ -30,7 +30,7 @@
             <p class="card-text">{{$p->descricao}}</p>
           </div>
           <div class="card-footer text-center">
-            <form action="/carrinho/add/{{ $p->id }}" method="post">
+            <form action="/carrinho/add/{{ $p->id }}" method="get">
               @csrf
               <input type="hidden" name="produto_id" value="{{$p->id}}">
               <button type="submit" class="btn btn-primary">Comprar</button>

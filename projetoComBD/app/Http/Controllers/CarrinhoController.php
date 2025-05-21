@@ -7,10 +7,11 @@ use App\Models\Pedido;
 use App\Models\Produto;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class CarrinhoController extends Controller
 {
-    public function add(Request $request)
+    public function add($id)
     {
         $user = Auth::user();
         $produtoId = $id;
@@ -39,7 +40,7 @@ class CarrinhoController extends Controller
         }
 
         $pedido->total = ItensPedido::where('pedido_id', $pedido->id)
-            ->sum(DB::raw('quantidade * preco'));
+            ->sum(DB::raw('quantidade * preco')); //DB::raw serve para escrever expressões SQL puras dentro de uma consulta do Laravel.sem tentar interpretar como nome de coluna
         $pedido->save();
 
         return redirect('home-cli');
